@@ -1,0 +1,116 @@
+void main()
+{
+  //classlar ortak özellik ve sistemi tutarlar. miras ortak temel oop konusudur. 
+  print("ömer doğu");
+  print("/////////////////////////////");
+  var personelManager=new PersonelManager();
+  personelManager.add();
+
+  var customerManager=new CustomerManager();
+  var customer1=new Customer.WithInfo("Yasemin","Doğu");  //farlı bir müşteri tanımlama var. 
+  print("///////////");
+
+  var customer2=new Customer();//farklı bir müşteri tanımlaması var. 
+    customer1=customer2; //eşitledik. ve sonra 2 atadık. customer2 firstname değiştirdik. ne yazar? 
+  customer2.firtsName="Ali";
+  customer2.firtsName="İbrahim";
+  customer2.lastName="DOĞU";
+  customer2.idendtityNumber="2";
+  customerManager.add(customer1);
+
+  customer1=customer2; //eşitledik. ve sonra 2 atadık. customer2 firstname değiştirdik. ne yazar? 
+  customer2.firtsName="Ali";
+  
+  var controller=new PersonController();
+  controller.operation(customer1);
+
+  //aynı yere personel gönderelim. 
+  Personel personel=new Personel();
+  controller.operation(personel);
+}
+
+
+class PersonelManager
+{
+  void add()
+  {
+    print("Eklendi...");
+  }
+  void update()
+  {
+    print("güncellendi...");
+  }
+  void delete()
+  {
+    print("silindi...");
+  }
+}
+class CustomerManager
+{
+  
+  void add(Customer customer)
+  {
+    print("Eklendi..."+customer.firtsName);
+  }
+  void update()
+  {
+    print("güncellendi...");
+  }
+  void delete()
+  {
+    print("silindi...");
+  }
+}
+
+class Customer extends Person{
+   
+  Customer(){
+    
+  }
+  //constructor
+  Customer.WithInfo(String firstName, String lastName){
+    this.firtsName=firstName;
+    this.lastName=lastName;
+  }
+  
+}
+class Personel extends Person{
+  
+  int dateOfStart=2023;
+  Personel(){
+    
+  }
+  //constructor
+  Personel.WithInfo(String firstName, String lastName, int dateOfStart){
+    this.firtsName=firstName;//yaklaşık yanı degişken bilgileri mevcuttur. 
+    this.lastName=lastName;
+    this.dateOfStart=dateOfStart;
+  }
+  
+}
+
+class Person{
+  String firtsName="ömer";
+  String lastName="doğu";
+  String idendtityNumber="3909999992";
+}
+
+//sizi sektörde daha avantajlı hale getirecek kısım...
+
+//bellekte iki kısım vardır. bunlardan birisi stack ve diğeri heap alanıdır. 
+//heap ve stack 
+//herhangibir değişken tanımladığımız düşünürsek, customer1= kadar kısım belleğin stack kısmında tanımlanır. classlar referans tiptir. sınıflar heap kısmında oluşur.
+//newden son kısım heapta sol tarafı eşitliğin sağ kısmı stack oluşur.
+//101 gibi bellek adresiverilir. c1 atanır. Customer1 atanır. costomer1 101 nolu bellek referansını tutar. p diye bir yeni yapı tanımlarsak eşitliğin sol tarafı ise stackta tutulur karşısında new=...dersek referas heapta aynı bellekte tutuluyor olabilir. class referansı tutulur. 
+
+///customer1=customer2 dediğimizde müşteri 1 referans numarsı mmüşteri 2 referans numarası oluştur. 
+//Bir sınıf başka bir sınıftan inherin edilirse(temel sınıf) bunun(customer ve personel) referansını tutabilir. Generic yapılarda anlaşılması açısından önemildir. 
+//bu aynı zamanda siz bir fonksiyonun içine 
+class PersonController{
+  void operation(Person person){ //bu operasyona hem Customer, hem Personel hem de Person gönderebiliriz. biz buraya bellekteki adresi referansı gönderiyoruz. hem Customer, hem Person hem de Personeli tutmaktadır. 
+    print("Inheritance ekleme:"+person.firtsName);
+  }
+}
+
+
+//kavramlar konusunda eksik olmassak diğer yapıları daha iyi anlaşırız. flutter tarafında bir widged tarafındaki karşılığını konuşalım. 
