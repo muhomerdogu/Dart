@@ -1,0 +1,37 @@
+void main()
+{
+  //dizi mantığı array olan mantık burada olmassa da ona benzeyen yapı burada mevcuttur. bu da listelerdir. 
+  List sehirler=["Ankara","Kayseri","Eskişehir","Niğde","Adıyaman","Bingöl"]; //temel liste dildir. 
+  sehirler[0]="Ankara";  //değiştiriyoruz!
+  sehirler[1]="Eskişehir";
+  sehirler[2]="Kayseri";
+  //yazabiiyorduk. 
+  print(sehirler);
+
+  //bir de growable hali vardır.bu listeye add fonksiyonu ile eklemek mümkündür. 
+ var urunler=["Bilgisayar","Masaüstü","Samsun"]; //klasik liste yapısı dinamik (obje) yapısı tutar. ister int ister String atayabiliriz. Biz burada şehirler metinsel olsun. zorunlu olsun.programcı hata yapmasın. İlla string olmasını istersek tipinie karar veririz. 
+//örnek (exapmle)
+List<String> ilcelerNigde=["Çamardı","Merkez","Bor","Altunhisar","Çiftlik","Ulukışla"];
+  //şimdi biz burada ilcelerNigde[2]=200; atayamayız. ama ilcelerNigde="200"; ataması yaplabilir.birisi string diğeri integerdır. 
+// type safety tip güvenli olarak ifade edilir. Sizin daha ikna olacak yapı string veya integer olması değildir. Sadece bu veriyi yaparak da kullanılabilinir. 
+//Gerek hayatta verilerimiz sadece int, boolean, String, double, decimal olarak gelmez. ürünler listesi geldiğini düşünün. bir sürü data gelir. Az önce öğrendiğimiz gibi class yapısı ile oluşturualım 
+List<Product> product1=[Product("Şeker",55)];
+List<Product> product2=[Product("Elma",25),Product("Sehpa",1000)];
+print(product1);
+print(product2);
+print(product1[0].name);
+  
+  
+  
+}
+//SINIFI OLUTŞURDUK. 
+class Product{
+  String name="Test";
+  double unitPrice=0;
+  Product(String name, double unitPrice)
+  {
+    this.name=name;
+    this.unitPrice=unitPrice;
+    
+  }
+}
